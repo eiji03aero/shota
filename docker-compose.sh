@@ -29,6 +29,15 @@ elif [ $cmd = 'stop' ]; then
 elif [ $cmd = 'bash-client' ]; then
   execute-docker-compose exec $container_name /bin/bash
 
+elif [ $cmd = 'bash-backend' ]; then
+  execute-docker-compose exec backend /bin/bash
+
+elif [ $cmd = 'bash-db' ]; then
+  execute-docker-compose exec shota-db /bin/bash
+
+elif [ $cmd = 'postgres' ]; then
+  execute-docker-compose exec shota-db psql postgresql://shota:password@localhost:5432/shota
+
 else
   execute-docker-compose $@
 fi
