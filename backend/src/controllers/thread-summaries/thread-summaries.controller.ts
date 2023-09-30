@@ -92,8 +92,12 @@ export class ThreadSummariesController {
     threadSummary.title = body.title;
     threadSummary.url = body.url;
     await threadSummaryRepo.save(threadSummary);
-    await threadPostsRepo.delete(deletedIds);
-    await threadPostsRepo.save(addedPosts);
+    if (addedPosts.length > 0) {
+      await threadPostsRepo.save(addedPosts);
+    }
+    if (deletedIds.length > 0) {
+      await threadPostsRepo.delete(deletedIds);
+    }
 
     return {};
   }

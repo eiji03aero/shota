@@ -1,2 +1,2 @@
-# docs
+# Docs
 - [Features](./features/README.md)

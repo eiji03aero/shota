@@ -1,8 +1,8 @@
 import * as threadApis from '@/domain/thread/api';
-import { ThreadSummaryIndex } from '@/views/ThreadSummaryIndex';
+import { ThreadSummaryList } from '@/app/admin/thread-summaries/_components/ThreadSummaryList';
 
 export default async function ThreadSummariesList() {
   const { responseData } = await threadApis.indexThreadSummaries();
 
-  return <ThreadSummaryIndex threadSummaries={responseData} />;
+  return <ThreadSummaryList threadSummaries={responseData} />;
 }

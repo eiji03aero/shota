@@ -1,6 +1,5 @@
-import Link from 'next/link';
-
 import { Box, Typography } from '@/modules/components/mui';
+import { Link } from '@/modules/components/shared';
 import { ThreadSummary } from '@/domain/thread/api';
 
 type Props = {

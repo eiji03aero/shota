@@ -43,6 +43,17 @@ export function ThreadSummaryEditor({ url, initialData, onSubmit }: Props) {
     setSelectedIds((prev) => prev.filter((p) => p !== id));
   }, []);
 
+  const handleAddAll = React.useCallback(() => {
+    if (!data) {
+      return;
+    }
+
+    const ids = data.responseData.posts
+      .map((post) => post.postId)
+      .slice(0, 100);
+    setSelectedIds(ids);
+  }, [data]);
+
   const handleSubmit = React.useCallback(() => {
     if (!data) {
       return;
@@ -84,8 +95,12 @@ export function ThreadSummaryEditor({ url, initialData, onSubmit }: Props) {
         )}
       </Box>
 
-      <Box sx={{ p: 1, textAlign: 'right' }}>
-        <Button color="primary" onClick={handleSubmit}>
+      <Box sx={{ p: 1, display: 'flex', justifyContent: 'space-between' }}>
+        <Button color="primary" onClick={handleAddAll}>
+          Add all
+        </Button>
+
+        <Button variant="contained" color="primary" onClick={handleSubmit}>
           Save
         </Button>
       </Box>

@@ -8,16 +8,30 @@
 ## shota
 - Web app for end user
 
-### Features
-- Browse thread
-- Leave comment on thread
-- Search for threads
-- Find realtime trend
-- Find recent threads
-- Find threads by category
+### Pages
+#### Top
+- Show realtime trend
+- Show recent threads
+- Show recent comments
+
+#### Thread
+- Show thread info
+- Show thread messages
+- Use forum
+
+#### Thread list
+- Search for thread
+- Open thread
+
+#### View history
+- Lists history of threads
+
+### Misc
+- Use cookie to distinguish end users
+
 
 ## admin
-- Administrator app to manage 3chan
+- Administrator app to manage shota
 
 ### Features
 - Create thread
