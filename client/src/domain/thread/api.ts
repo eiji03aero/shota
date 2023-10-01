@@ -20,10 +20,16 @@ export type ThreadSummary = {
   posts: ThreadPost[];
 };
 
-type IndexThreadSummariesParams = {};
+export type IndexThreadSummariesParams = {
+  keyword?: string;
+};
 type IndexThreadSummariesRespose = ThreadSummary[];
-export const indexThreadSummaries = async () => {
-  const response = await axios.get(`${getApiUrl()}thread-summaries`);
+export const indexThreadSummaries = async (
+  params?: IndexThreadSummariesParams,
+) => {
+  const response = await axios.get(`${getApiUrl()}thread-summaries`, {
+    params,
+  });
 
   return {
     responseData: response.data as IndexThreadSummariesRespose,

@@ -16,6 +16,7 @@ elif [ $cmd = 'thread-summaries-index' ]; then
   curl \
     -G \
     -H 'Content-Type: application/json' \
+    --data-urlencode "keyword=西武" \
     $server_url/thread-summaries/ | jq
 
 elif [ $cmd = 'thread-summaries-create' ]; then

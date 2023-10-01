@@ -1,19 +1,36 @@
-import { Controller, Get, Post, Put, Body, Param } from '@nestjs/common';
-import { DataSource, In } from 'typeorm';
+import { Controller, Get, Post, Put, Body, Param, Query } from '@nestjs/common';
+import { DataSource, Like } from 'typeorm';
 
 import { ThreadSummary } from '../../entities/ThreadSummary';
 import { ThreadPost } from '../../entities/ThreadPost';
 
 import * as dto from './dto';
 
+const sleep = (ms: number) => {
+  return new Promise((res) => setTimeout(res, ms));
+};
+
 @Controller('thread-summaries')
 export class ThreadSummariesController {
   constructor(private readonly dataSource: DataSource) {}
 
   @Get()
-  async index() {
+  async index(
+    @Query()
+    query: {
+      keyword?: string;
+    },
+  ) {
     const threadSummaryRepo = this.dataSource.getRepository(ThreadSummary);
-    return threadSummaryRepo.find({ relations: { posts: true } });
+
+    await sleep(3000);
+
+    return threadSummaryRepo.find({
+      where: {
+        title: query.keyword ? Like(`%${query.keyword}%`) : undefined,
+      },
+      relations: { posts: true },
+    });
   }
 
   @Get(':id')

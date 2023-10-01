@@ -1,10 +1,13 @@
-import * as threadApis from '@/domain/thread/api';
+import * as React from 'react';
+
+import { ContentLoader } from '@/modules/components/shared';
 
 import { ThreadSummaryList } from '@/app/user/thread-summaries/_components/ThreadSummaryList';
 
 export default async function ThreadSummaryListPage() {
-  const { responseData: threadSummaries } =
-    await threadApis.indexThreadSummaries();
-
-  return <ThreadSummaryList threadSummaries={threadSummaries} />;
+  return (
+    <React.Suspense fallback={<ContentLoader />}>
+      <ThreadSummaryList />
+    </React.Suspense>
+  );
 }
