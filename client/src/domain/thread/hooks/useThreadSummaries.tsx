@@ -8,7 +8,7 @@ type Params = {
 
 export const useThreadSummaries = ({ params }: Params) => {
   return useQuery({
-    queryKey: ['thread-summary', 'list', params?.keyword],
+    queryKey: ['thread-summary', params?.keyword],
     queryFn: () => threadApis.indexThreadSummaries(params),
     suspense: true,
   });

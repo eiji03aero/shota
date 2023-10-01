@@ -26,6 +26,9 @@
 #### View history
 - Lists history of threads
 
+### Feature candidate
+- comment history
+
 ### Misc
 - Use cookie to distinguish end users
 
@@ -46,3 +49,17 @@
 - pick posts to include
 - remove picked posts
 - save
+
+---
+
+# Models
+## ThreadSummaryForum
+- id: int
+- thread_id: int FK
+
+## ThreadSummaryForumPost
+- id: int
+- thread_summary_forum_id: number
+- post_id: int
+- content: text
+- created_at: timestamp;

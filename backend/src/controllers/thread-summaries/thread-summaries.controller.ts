@@ -3,6 +3,7 @@ import { DataSource, Like } from 'typeorm';
 
 import { ThreadSummary } from '../../entities/ThreadSummary';
 import { ThreadPost } from '../../entities/ThreadPost';
+import { ThreadSummaryForum } from '../../entities/ThreadSummaryForum';
 
 import * as dto from './dto';
 
@@ -66,6 +67,10 @@ export class ThreadSummariesController {
       return threadPost;
     });
     await this.dataSource.manager.save(posts);
+
+    const threadSummaryForum = new ThreadSummaryForum();
+    threadSummaryForum.thread = threadSummary;
+    await this.dataSource.manager.save(threadSummaryForum);
 
     return {};
   }

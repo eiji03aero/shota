@@ -1,6 +1,13 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany,
+  OneToOne,
+} from 'typeorm';
 
 import { ThreadPost } from './ThreadPost';
+import { ThreadSummaryForum } from './ThreadSummaryForum';
 
 @Entity({ name: 'thread_summaries' })
 export class ThreadSummary {
@@ -15,4 +22,10 @@ export class ThreadSummary {
 
   @OneToMany(() => ThreadPost, (threadPost) => threadPost.thread)
   posts: ThreadPost[];
+
+  @OneToOne(
+    () => ThreadSummaryForum,
+    (threadSummaryForum) => threadSummaryForum.thread,
+  )
+  forum: ThreadPost[];
 }

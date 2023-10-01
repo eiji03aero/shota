@@ -64,6 +64,24 @@ EOF
     )) \
     $server_url/thread-summaries/1 | jq
 
+elif [ $cmd = 'thread-summary-forum-show' ]; then
+  curl \
+    -G \
+    -H 'Content-Type: application/json' \
+    $server_url/thread-summaries/2/forum | jq
+
+elif [ $cmd = 'thread-summary-forum-post-create' ]; then
+  curl \
+    -X POST \
+    -H 'Content-Type: application/json' \
+    -d $(printf '%s' $(cat <<- EOF
+      {
+        "content": "Domo"
+      }
+EOF
+    )) \
+    $server_url/thread-summaries/2/forum/post | jq
+
 else
   echo "not recognized: ${cmd}"
 fi
