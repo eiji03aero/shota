@@ -48,7 +48,7 @@ export class ThreadSummaryForumsController {
     const postId = lastPost?.postId ? lastPost.postId + 1 : 1;
 
     const post = new ThreadSummaryForumPost();
-    post.uid = body.uid;
+    post.userId = body.userId;
     post.postId = postId;
     post.forum = forum;
     post.content = body.content;

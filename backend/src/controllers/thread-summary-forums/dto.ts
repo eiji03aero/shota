@@ -1,4 +1,4 @@
 export type CreatePostDto = {
-  uid: string;
+  userId: string;
   content: string;
 };

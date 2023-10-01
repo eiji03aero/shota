@@ -1,9 +1,10 @@
 import { Controller, Get, Post, Put, Body, Param, Query } from '@nestjs/common';
-import { DataSource, Like } from 'typeorm';
+import { DataSource, Like, In } from 'typeorm';
 
 import { ThreadSummary } from '../../entities/ThreadSummary';
 import { ThreadPost } from '../../entities/ThreadPost';
 import { ThreadSummaryForum } from '../../entities/ThreadSummaryForum';
+import { ThreadSummaryView } from '../../entities/ThreadSummaryView';
 
 import * as dto from './dto';
 
@@ -14,6 +15,38 @@ const sleep = (ms: number) => {
 @Controller('thread-summaries')
 export class ThreadSummariesController {
   constructor(private readonly dataSource: DataSource) {}
+
+  @Get('views')
+  async indexViews(
+    @Query()
+    query: {
+      userId: string;
+    },
+  ) {
+    const threadSummaryViewRepo =
+      this.dataSource.getRepository(ThreadSummaryView);
+
+    const viewHistories = await threadSummaryViewRepo
+      .createQueryBuilder('v')
+      .select('v.thread_id', 'thread_id')
+      .addSelect('MAX(v.id)', 'id')
+      .where({ userId: query.userId })
+      .groupBy('v.thread_id')
+      .orderBy('MIN(v.created_at)', 'DESC')
+      .getRawMany<{
+        thread_id: number;
+        id: number;
+      }>();
+
+    const viewIds = viewHistories.map((v) => v.id);
+    const views = await threadSummaryViewRepo.find({
+      where: { id: In(viewIds) },
+      order: { createdAt: 'DESC' },
+      relations: { thread: true },
+    });
+
+    return views;
+  }
 
   @Get()
   async index(
@@ -120,6 +153,25 @@ export class ThreadSummariesController {
     if (deletedIds.length > 0) {
       await threadPostsRepo.delete(deletedIds);
     }
+
+    return {};
+  }
+
+  @Post(':id/views')
+  async createView(
+    @Param('id')
+    id: string,
+    @Body()
+    body: dto.CreateViewDao,
+  ) {
+    const threadSummaryViewRepo =
+      this.dataSource.getRepository(ThreadSummaryView);
+
+    const view = new ThreadSummaryView();
+    view.userId = body.userId;
+    view.threadId = parseInt(id);
+    view.createdAt = new Date();
+    await threadSummaryViewRepo.save(view);
 
     return {};
   }

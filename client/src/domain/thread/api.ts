@@ -34,6 +34,13 @@ export type ThreadSummaryForumPost = {
   createdAt: string;
 };
 
+export type ThreadSummaryView = {
+  id: number;
+  userId: string;
+  createdAt: string;
+  thread: ThreadSummary;
+};
+
 export type IndexThreadSummariesParams = {
   keyword?: string;
 };
@@ -100,7 +107,7 @@ export const showThreadSummaryForum = async (
 };
 
 type CreateThreadSummaryForumPostParams = {
-  uid: string;
+  userId: string;
   threadId: number;
   content: string;
 };
@@ -114,4 +121,33 @@ export const createThreadSummaryForumPost = async ({
   );
 
   return;
+};
+
+type CreateThreadSummaryViewParams = {
+  userId: string;
+  threadId: number;
+};
+export const createThreadSummaryView = async ({
+  threadId,
+  ...data
+}: CreateThreadSummaryViewParams) => {
+  await axios.post(`${getApiUrl()}thread-summaries/${threadId}/views`, data);
+
+  return;
+};
+
+type IndexThreadSummaryViewsParams = {
+  userId: string;
+};
+type IndexThreadSummaryViewsResponse = ThreadSummaryView[];
+export const indexThreadSummaryViews = async (
+  params: IndexThreadSummaryViewsParams,
+) => {
+  const response = await axios.get(`${getApiUrl()}thread-summaries/views`, {
+    params,
+  });
+
+  return {
+    responseData: response.data as IndexThreadSummaryViewsResponse,
+  };
 };

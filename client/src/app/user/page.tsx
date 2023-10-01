@@ -1,6 +1,8 @@
+import * as sharedStyles from '@/modules/styles/shared';
+
 export default function Top() {
   return (
-    <div className="px-6 py-4">
+    <div className={sharedStyles.container}>
       <h1>Top view comes here</h1>
     </div>
   );

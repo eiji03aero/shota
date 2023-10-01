@@ -9,6 +9,10 @@ const DropdownItems = [
     label: 'Threads',
     href: '/user/thread-summaries/',
   },
+  {
+    label: 'My page',
+    href: '/user/my/',
+  },
 ];
 
 export function Nav() {

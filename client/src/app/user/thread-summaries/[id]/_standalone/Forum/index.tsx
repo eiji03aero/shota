@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 
-import { useUid } from '@/domain/auth/hooks/useUid';
+import { useUserId } from '@/domain/auth/hooks/useUserId';
 import { useThreadSummaryForum } from '@/domain/thread/hooks/useThreadSummaryForum';
 import { useCreateThreadSummaryForumPost } from '@/domain/thread/hooks/useCreateThreadSummaryForumPost';
 
@@ -14,7 +14,7 @@ type Props = {
 
 export function Forum({ threadId }: Props) {
   const [content, setContent] = React.useState('');
-  const { uid } = useUid();
+  const { userId } = useUserId();
 
   const threadSummaryForumParams = React.useMemo(() => {
     return { threadId };
@@ -28,11 +28,11 @@ export function Forum({ threadId }: Props) {
   const handleSubmit = React.useCallback(
     async (e: React.FormEvent) => {
       e.preventDefault();
-      await mutateAsync({ uid, threadId, content });
+      await mutateAsync({ userId, threadId, content });
       refetch();
       setContent('');
     },
-    [mutateAsync, refetch, uid, threadId, content],
+    [mutateAsync, refetch, userId, threadId, content],
   );
 
   return (

@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 
-import { useSetUid } from '@/domain/auth/hooks/useSetUid';
+import { useSetUserId } from '@/domain/auth/hooks/useSetUserId';
 
 import { Nav } from '@/app/user/_components/Nav';
 
@@ -11,7 +11,7 @@ type Props = {
 };
 
 export function NavLayout({ children }: Props) {
-  useSetUid();
+  useSetUserId();
 
   return (
     <div className="bg-orange-50 min-h-screen">

@@ -76,11 +76,31 @@ elif [ $cmd = 'thread-summary-forum-post-create' ]; then
     -H 'Content-Type: application/json' \
     -d $(printf '%s' $(cat <<- EOF
       {
+        "userId": "hogehoge",
         "content": "Domo"
       }
 EOF
     )) \
     $server_url/thread-summaries/2/forum/post | jq
+
+elif [ $cmd = 'thread-summary-views-create' ]; then
+  curl \
+    -X POST \
+    -H 'Content-Type: application/json' \
+    -d $(printf '%s' $(cat <<- EOF
+      {
+        "userId": "hogehoge"
+      }
+EOF
+    )) \
+    $server_url/thread-summaries/2/views | jq
+
+elif [ $cmd = 'thread-summary-views-index' ]; then
+  curl \
+    -G \
+    -H 'Content-Type: application/json' \
+    --data-urlencode "userId=01HBNN68GWFDEEZTWD46Q6YG86" \
+    $server_url/thread-summaries/views | jq
 
 else
   echo "not recognized: ${cmd}"

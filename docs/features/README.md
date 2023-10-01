@@ -59,7 +59,14 @@
 
 ## ThreadSummaryForumPost
 - id: int
+- user_id: string
 - thread_summary_forum_id: number
 - post_id: int
 - content: text
 - created_at: timestamp;
+
+## ThreadSummaryView
+- id: int
+- user_id: string;
+- thread_id: int FK
+- created_at: timestamp

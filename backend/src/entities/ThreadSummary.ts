@@ -8,6 +8,7 @@ import {
 
 import { ThreadPost } from './ThreadPost';
 import { ThreadSummaryForum } from './ThreadSummaryForum';
+import { ThreadSummaryView } from './ThreadSummaryView';
 
 @Entity({ name: 'thread_summaries' })
 export class ThreadSummary {
@@ -28,4 +29,7 @@ export class ThreadSummary {
     (threadSummaryForum) => threadSummaryForum.thread,
   )
   forum: ThreadPost[];
+
+  @OneToMany(() => ThreadSummaryView, (view) => view.thread)
+  views: ThreadSummaryView[];
 }

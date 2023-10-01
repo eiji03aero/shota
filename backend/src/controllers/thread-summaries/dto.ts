@@ -17,3 +17,7 @@ export class UpdateDto {
   url: string;
   posts: PostDao[];
 }
+
+export type CreateViewDao = {
+  userId: string;
+};

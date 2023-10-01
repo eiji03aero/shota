@@ -13,8 +13,8 @@ export class ThreadSummaryForumPost {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ name: 'uid' })
-  uid: string;
+  @Column({ name: 'user_id' })
+  userId: string;
 
   @Column({ name: 'thread_summary_forum_id' })
   threadSummaryForumId: number;

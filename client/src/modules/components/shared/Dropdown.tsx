@@ -40,6 +40,10 @@ export function Dropdown({ label, items }: Props) {
     dropdownCoordsRef.current.y = rect.top + rect.height + 8;
   }, [isOpen]);
 
+  const handleClickOnItem = React.useCallback(() => {
+    setIsOpen(false);
+  }, []);
+
   return (
     <>
       <button ref={labelRef} onClick={handleClickOnLabel}>
@@ -64,6 +68,7 @@ export function Dropdown({ label, items }: Props) {
                 key={idx}
                 href={item.href}
                 className="block border-b border-slate-200 px-6 py-2"
+                onClick={handleClickOnItem}
               >
                 {item.label}
               </Link>

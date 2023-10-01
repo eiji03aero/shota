@@ -2,12 +2,15 @@
 Hobby project to dig into the potential of Next.js
 
 # Todo
-- [ ] Unify how it is layouted
-    - define component
-    - so that it applies to loader as well
+- [ ] Fix my page content not updated
+    - open thread summary and come back
+    - then you see the content won't be updated
 - [ ] Impl authentication for admin
 - [ ] Impl top page
-- [ ] Impl view history feature
+- [x] Impl view history feature
+- [x] Unify how it is layouted
+    - define component
+    - so that it applies to loader as well
 - [x] Impl thread comment forum
 - [x] Impl user identifier with cookie
 - [x] Impl Thread list search
